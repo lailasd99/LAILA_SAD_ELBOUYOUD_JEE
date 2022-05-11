@@ -12,7 +12,7 @@
 <div layout:fragment="content1">
     <div class="container mt-2">
         <div class="card">
-            <div class="card-header">Liste des Patients</div>
+            <div class="card-header">Liste des Etudiants</div>
             <div class="card-body">
                 <form method="get" th:action="@{/user/index}">
                     <label>keyword</label>
@@ -24,25 +24,29 @@
                     <tr>
                         <th>ID</th>
                         <th>Nom</th>
-                        <th>Date</th>
-                        <th>Malade</th>
-                        <th>Score</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Date Naissance</th>
+                        <th>Genre</th>
+                        <th>Régle</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="p:${listPatients}">
-                        <td th:text="${p.id}"></td>
-                        <td th:text="${p.nom}"></td>
-                        <td th:text="${p.dateNaissance}"></td>
-                        <td th:text="${p.malade}"></td>
-                        <td th:text="${p.score}"></td>
+                    <tr th:each="s:${listStudents}">
+                        <td th:text="${s.id}"></td>
+                        <td th:text="${s.nom}"></td>
+                        <td th:text="${s.prenom}"></td>
+                        <td th:text="${s.email}"></td>
+                        <td th:text="${s.dateNaissance}"></td>
+                        <td th:text="${s.genre}"></td>
+                        <td th:text="${s.regle}"></td>
                         <td sec:authorize="hasAuthority('ADMIN')">
-                            <a onclick="return confirm('Etes vous surs?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                            <a onclick="return confirm('Etes vous surs?')" class="btn btn-danger" th:href="@{/admin/delete(id=${s.id}, keyword=${keyword}, page=${currentPage})}">
                                 Supprimer
                             </a>
                         </td>
                         <td sec:authorize="hasAuthority('ADMIN')">
-                            <a class="btn btn-success" th:href="@{/admin/editPatients(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                            <a class="btn btn-success" th:href="@{/admin/editStudent(id=${s.id}, keyword=${keyword}, page=${currentPage})}">
                                 Modifier
                             </a>
                         </td>
